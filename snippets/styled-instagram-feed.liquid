@@ -1,0 +1,71 @@
+<style style="text/css">
+#styled-instagram-feed .fs-has-links::after {
+  padding: 5px 7.5px;
+  border: 1px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  content: "SHOP THE LOOK";
+}
+#styled-instagram-feed .fs-has-links:hover:after {
+  background-color: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.25);
+}
+#styled-instagram-feed .fs-wrapper {
+  height: auto;
+}
+#styled-instagram-feed .fs-entry-container {
+  /*height: auto !important;*/
+  float: none !important;
+  vertical-align: top;
+}
+#styled-instagram-feed .fs-desktop div.fs-entry-container {
+  width: 25% !important;
+  padding-top: 25% !important;
+}
+#styled-instagram-feed .fs-mobile div.fs-entry-container {
+  width: 50% !important;
+  padding-top: 50% !important;
+}
+#styled-instagram-feed .fs-wrapper div.fs-text-container .fs-entry-title,
+#styled-instagram-feed div.fs-detail-title {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-weight: normal;
+}
+#styled-instagram-feed div.fs-text-container .fs-entry-date,
+#styled-instagram-feed div.fs-detail-container .fs-post-info,
+#styled-instagram-feed div.fs-wrapper div.fs-has-links::after,
+#styled-instagram-feed .fs-text-product,
+#styled-instagram-feed .fs-overlink-text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+#styled-instagram-feed .fs-wrapper div.fs-text-container * {
+  color: rgb(255, 255, 255);
+}
+#styled-instagram-feed .fs-wrapper div.fs-text-container {
+  background-color: rgba(0, 0, 0, 0.25);
+  margin: 0px;
+}
+#styled-instagram-feed div.fs-entry-date,
+#styled-instagram-feed div.fs-entry-title {
+  display: none;
+}
+#styled-instagram-feed .fs-wrapper div.fs-timeline-entry {
+  margin: 1px;
+}
+</style>
+<div id="styled-instagram-feed" style="display: none">
+  <h1 style="text-align: center"><a href="https://alphaprimeusa.com/pages/shopig" class="icon-instagram">Styled On Instagram</a></h1>
+  <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="alpha-prime-apparel_1" data-theme="slider_v2_5" data-connector-filter="27537,29391,29392,29393,29394,30696" data-for-url="true"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function($) {
+      var styledInstagramFeed = $('#styled-instagram-feed');
+      $(window).on('load', function() {
+        if (styledInstagramFeed.find('.fs-entry-container').length > 0) {
+          styledInstagramFeed.show();
+        }
+      });
+    });
+  </script>
+</div>

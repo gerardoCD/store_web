@@ -1,0 +1,60 @@
+{%- capture product_images_json -%}
+  {%- for image in product.images -%}
+    {%- assign modelSize = false -%}
+    {%- if image.alt contains 'size' -%}
+      {%- assign modelSize = image.alt | strip | split: 'size' | last | downcase -%}
+    {%- endif -%}
+    {
+      id: {{ image.id }},
+      alt: '{{ image.alt }}',
+      color: '{{ image.alt | strip | split: ',' | first | downcase }}',
+      modelSize: {%- if modelSize != false -%}'{{ modelSize }}'{%- else -%}false{%- endif -%},
+      sizes: {
+        100: '{{ image | product_img_url: '100x' | split: '?' | first }}',
+        200: '{{ image | product_img_url: '200x' | split: '?' | first }}',
+        400: '{{ image | product_img_url: '400x' | split: '?' | first }}',
+        600: '{{ image | product_img_url: '600x' | split: '?' | first }}',
+        800: '{{ image | product_img_url: '800x' | split: '?' | first }}',
+        1200: '{{ image | product_img_url: '1200x' | split: '?' | first }}',
+        2000: '{{ image | product_img_url: '2000x' | split: '?' | first }}',
+      },
+      width: {{ image.width }},
+      height: {{ image.height }}
+    }{%- if forloop.last == false %},{% endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{% capture new_line %}
+{% endcapture %}
+
+<script>
+  var productImages = [{{ product_images_json | split: new_line | join: '' }}];
+</script>
+
+<div class="gallery-wrap js-product-page-gallery clearfix
+  gallery-arrows--{{section.settings.gallery_arrows}}
+  {% if section.settings.product_thumbs %} {{ section.settings.thumbnail_position }} {% endif %}
+  slideshow_animation--{{ section.settings.slideshow_animation }}
+  ">
+  <div class="gallery-wrap js-product-page-gallery clearfix
+    gallery-arrows--{{section.settings.gallery_arrows}}
+    {% if section.settings.product_thumbs %} {{ section.settings.thumbnail_position }} {% endif %}
+    slideshow_animation--{{ section.settings.slideshow_animation }}
+    ">
+    <div class="row">
+      <div class="three-fourths column main_img_wrap" style="float: right;">
+        <div class="product_gallery product-{{ product.id }}-gallery
+          {% if product.images.size > 1 %} multi-image {% endif %}
+          {% if product.images.size <= 1 %} single-image {% endif %}
+          {% if settings.slideshow_button_style != true %}light-button{% endif %}"
+          data-zoom="{{ section.settings.activate_zoom }}"
+          data-autoplay="{{ section.settings.activate_autoplay }}"
+          data-lightbox="{%- if template != 'index' and section.settings.enable_product_lightbox -%}true{%- else -%}false{%- endif -%}"></div>
+      </div>
+      <div class="one-fourth column hidden-small thumbnail_wrap" data-images="{{product.images.size}}">
+        {% if section.settings.product_thumbs and product.images.size > 1 and image_width != 'full' %}
+          <div class="product_gallery_nav product-{{ product.id }}-gallery-nav"></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
